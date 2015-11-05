@@ -8,21 +8,12 @@ This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.
 
 ### Usage
 
-```ruby
-rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407'
+` rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407'` - for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.  
+`api = RucaptchaApi.new rucaptcha_key`  
+`path_to_captcha = File.expand_path 'var/captchas/1.png'` - path to image of your captcha (only accepts jpg,jpeg,gif,png)  
+`captcha_id = api.send_captcha_for_solving path_to_captcha, params: {phrase: 1}` - you send captcha for solving, and you get its id as a resonse so that you can later look up its solution when it's ready. 
+**params** here are optional, and you can find possible params in API docs https://rucaptcha.com/api-rucaptcha:
 
-``` - for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.
-
-
-```
-api = RucaptchaApi.new rucaptcha_key
-
-path_to_captcha = File.expand_path 'var/captchas/1.png' #path to image of your captcha (only accepts jpg,jpeg,gif,png)
-
-captcha_id = api.send_captcha_for_solving path_to_captcha, params: {phrase: 1} #you send captcha for solving, and you get its id as a resonse so that you can later look up its solution when it's ready. 
-#params here are optional, and you can find possible params in API docs: https://rucaptcha.com/api-rucaptcha
-
-```
 
 <table border="1" cellpadding="1" cellspacing="1" style="width:900px">
 	<thead>
@@ -122,14 +113,13 @@ captcha_id = api.send_captcha_for_solving path_to_captcha, params: {phrase: 1} #
 </table>
 
 
-```ruby
-#after you sent your captcha for solving and got captcha_id, you can find solved captcha with:
-solved_captcha = @api.get_solved_captcha captcha_id #=> Yi7yu8, for example
-#in case if it's not ready yet, this method will automatically wait for 5 seconds and then resend the request for solved captcha.
-```
+
+after you sent your captcha for solving and got captcha_id, you can find solved captcha with:
+`solved_captcha = @api.get_solved_captcha captcha_id #=> Yi7yu8` (in case it's not ready yet, this method will automatically wait for 5 seconds and then resend the request for solved captcha).
+
 in case your captcha wasn't properly solved, you can complain on it with `api.complain captcha_id`.
 
-###Methods to get statistics
+### Methods to get statistics
 `api.balance #=> 95.03` - Узнать баланс аккаунта. Баланс указывается в Российских рублях. 
 
 `api.captcha_cost captcha_id` - Запрос статуса и стоимости распознования данной капчи. Цена указывается в рублях.  
