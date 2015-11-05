@@ -10,6 +10,7 @@ This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.
 
 ```ruby
 rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407'
+
 ``` - for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.
 
 
