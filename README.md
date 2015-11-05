@@ -9,7 +9,11 @@ This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.
 ### Usage
 
 ```ruby
-rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407' #for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.
+rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407'
+``` - for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.
+
+
+```
 api = RucaptchaApi.new rucaptcha_key
 
 path_to_captcha = File.expand_path 'var/captchas/1.png' #path to image of your captcha (only accepts jpg,jpeg,gif,png)
