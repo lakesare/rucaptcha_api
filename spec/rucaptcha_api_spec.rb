@@ -12,8 +12,8 @@ describe RucaptchaApi do
 	end
 
 	it 'sends captcha for solving and gets solved captcha' do
-		options = {language: 2} #2 = на капче только латинские буквы
-		captcha_id = @api.send_captcha_for_solving @path_to_captcha, params: options
+		params = {language: 2} #2 = на капче только латинские буквы
+		captcha_id = @api.send_captcha_for_solving @path_to_captcha, params: params
 		expect(captcha_id).to match(/\d+/)
 
 

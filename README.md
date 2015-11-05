@@ -1,32 +1,128 @@
-# RucaptchaApi
+## RucaptchaApi
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rucaptcha_api`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a gem that facilitated interaction with https://rucaptcha.com/api-rucaptcha API.
 
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
+### Installation
 
 ```ruby
 gem 'rucaptcha_api'
 ```
 
-And then execute:
+### Usage
 
-    $ bundle
+```ruby
+rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407' #for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.
+api = RucaptchaApi.new rucaptcha_key
 
-Or install it yourself as:
+path_to_captcha = File.expand_path 'var/captchas/1.png' #path to image of your captcha (only accepts jpg,jpeg,gif,png)
 
-    $ gem install rucaptcha_api
+captcha_id = api.send_captcha_for_solving path_to_captcha, params: {phrase: 1} #you send captcha for solving, and you get its id as a resonse so that you can later look up its solution when it's ready. 
+#params here are optional, and you can find possible params in API docs: https://rucaptcha.com/api-rucaptcha
 
-## Usage
+```
 
-TODO: Write usage instructions here
+<table border="1" cellpadding="1" cellspacing="1" style="width:900px">
+	<thead>
+		<tr>
+			<th scope="col">POST параметр</th>
+			<th scope="col">возможные значения</th>
+			<th scope="col">описание параметра</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>phrase</td>
+			<td>0;1</td>
+			<td><strong>0</strong> = одно слово (значение по умлочанию)<br>
+			<strong>1</strong> = капча имеет два слова</td>
+		</tr>
+		<tr>
+			<td>regsense</td>
+			<td>0;1</td>
+			<td><strong>0</strong> = регистр ответа не имеет значения (значение по умолчанию )<br>
+			<strong>1</strong> = регистр ответа имеет значение</td>
+		</tr>
+		<tr>
+			<td>question</td>
+			<td>0;1</td>
+			<td><strong>0</strong> = параметр не задействован (значение по умолчанию )<br>
+			<strong>1</strong> = на изображении задан вопрос, работник должен написать ответ</td>
+		</tr>
+		<tr>
+			<td>numeric</td>
+			<td>0;1;2;3</td>
+			<td>
+			<p><strong>0</strong> = параметр не задействован (значение по умолчанию)<br>
+			<strong>1</strong> = капча состоит только из цифр<br>
+			<strong>2</strong> = Капча состоит только из букв<br>
+			<strong>3</strong> = Капча состоит либо только из цифр, либо только из букв.</p>
+			</td>
+		</tr>
+		<tr>
+			<td>calc</td>
+			<td>0;1</td>
+			<td><strong>0</strong> = параметр не задействован (значение по умолчанию)<br>
+			<strong>1</strong> = работнику нужно совершить математическое действие с капчи</td>
+		</tr>
+		<tr>
+			<td>min_len</td>
+			<td>0..20</td>
+			<td>
+			<p><strong>0</strong> = параметр не задействован (значение по умолчанию)<br>
+			<strong>1..20 </strong>= минимальное количество знаков в ответе</p>
+			</td>
+		</tr>
+		<tr>
+			<td>max_len</td>
+			<td>1..20</td>
+			<td><strong>0</strong> = параметр не задействован (значение по умолчанию)<br>
+			<strong>1..20 </strong>= максимальное количество знаков в ответе</td>
+		</tr>
+		<tr>
+			<td>is_russian</td>
+			<td>0;1</td>
+			<td>
+			<p>параметр больше не используется, т.к. он означал "слать данную капчу русским исполнителям", а в системе находятся только русскоязычные исполнители. Смотрите новый параметр language, однозначно обозначающий язык капчи</p>
+			</td>
+		</tr>
+		<tr>
+			<td>soft_id</td>
+			<td>&nbsp;</td>
+			<td>ID разработчика приложения. Разработчику приложения отчисляется 10% от всех капч, пришедших из его приложения.</td>
+		</tr>
+		<tr>
+			<td>language</td>
+			<td>0;1;2</td>
+			<td>
+			<strong>0</strong> = параметр не задействован (значение по умолчанию)<br>
+			<strong>1</strong> = на капче только кириллические буквы<br>
+			<strong>2</strong> = на капче только латинские буквы<br>
+			</td>
+		</tr>
+		<tr>
+			<td>header_acao</td>
+			<td>0;1</td>
+			<td><strong>0</strong> = значение по умолчанию<br>
+			<strong>1</strong> = in.php передаст Access-Control-Allow-Origin: * параметр в заголовке ответа. (Необходимо для кросс-доменных AJAX запросов в браузерных приложениях. Работает также для res.php.)</td>
+		</tr>
+		<tr>
+			<td>textinstructions</td>
+			<td>TEXT</td>
+			<td>Текст, который будет показан работнику. Может содержать в себе инструкции по разгадке капчи. Ограничение - 140 символов. Текст необходимо слать в кодировке UTF-8.</td>
+		</tr>
+		<tr>
+			<td>textcaptcha </td>
+			<td>TEXT</td>
+			<td>Текстовая капча. Картинка при этом не загружается, работник получает только текст и вводит ответ на этот текст. Ограничение - 140 символов. Текст необходимо слать в кодировке UTF-8.</td>
+		</tr>
+	</tbody>
+</table>
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+
+
+
+
 
