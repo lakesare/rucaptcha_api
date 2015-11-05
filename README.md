@@ -126,8 +126,11 @@ in case your captcha wasn't properly solved, you can complain on it with `api.co
 
 ###Methods to get statistics
 `api.balance #=> 95.03` - Узнать баланс аккаунта. Баланс указывается в Российских рублях. 
+
 `api.captcha_cost captcha_id` - Запрос статуса и стоимости распознования данной капчи. Цена указывается в рублях.  
+
 `api.stats_for date: '2013-11-27' # => string with xml` - получить статистику использования аккаунта в XML за указанную дату.  
+
 `RucaptchaApi.rucaptcha_stats # => {waiting: ..., ...}` - waiting: количество работников ожидающих капчу. load: процент загрузки работников. minbid: текущая ставка за распознание капчи. В рублях. averageRecognitionTime: среднее время (в секундах) за которое в данный момент разгадываются капчи
 
 
