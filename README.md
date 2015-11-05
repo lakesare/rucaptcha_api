@@ -1,12 +1,10 @@
 ## RucaptchaApi
 
-This is a gem that facilitated interaction with https://rucaptcha.com/api-rucaptcha API.
+This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.
 
 ### Installation
 
-```ruby
-gem 'rucaptcha_api'
-```
+`gem 'rucaptcha_api'`
 
 ### Usage
 
@@ -119,9 +117,18 @@ captcha_id = api.send_captcha_for_solving path_to_captcha, params: {phrase: 1} #
 </table>
 
 
+```ruby
+#after you sent your captcha for solving and got captcha_id, you can find solved captcha with:
+solved_captcha = @api.get_solved_captcha captcha_id #=> Yi7yu8, for example
+#in case if it's not ready yet, this method will automatically wait for 5 seconds and then resend the request for solved captcha.
+```
+in case your captcha wasn't properly solved, you can complain on it with `api.complain captcha_id`.
 
-
-
+###Methods to get statistics
+`api.balance #=> 95.03` - Узнать баланс аккаунта. Баланс указывается в Российских рублях
+`api.captcha_cost captcha_id` - Запрос статуса и стоимости распознования данной капчи. Цена указывается в рублях
+`api.stats_for date: '2013-11-27' # => string with xml` - получить статистику использования аккаунта в XML за указанную дату
+`RucaptchaApi.rucaptcha_stats # => {waiting: ..., ...}` - waiting: количество работников ожидающих капчу. load: процент загрузки работников. minbid: текущая ставка за распознание капчи. В рублях. averageRecognitionTime: среднее время (в секундах) за которое в данный момент разгадываются капчи
 
 
 
