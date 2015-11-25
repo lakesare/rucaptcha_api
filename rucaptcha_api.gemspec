@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jevgenija Karunus"]
   spec.email         = ["lakesare@gmail.com"]
 
-  spec.summary       = 'Ruby mapper for https://rucaptcha.com API'
+  spec.summary       = 'This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.'
   spec.homepage      = 'https://github.com/lakesare/rucaptcha_api'
   spec.license       = 'MIT'
 
