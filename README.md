@@ -6,7 +6,10 @@ This gem facilitates interaction with https://rucaptcha.com/api-rucaptcha API.
 
 `gem 'rucaptcha_api'`
 
-### Usage (or just take a look at /example.rb)
+### Fast usage
+[/example.rb](https://github.com/lakesare/rucaptcha_api/blob/master/example.rb)
+
+### Explained usage
 `require 'rucaptcha_api'`  
 `rucaptcha_key = '5d01e7jk4d9c64a784b25d38840d1407'` - for example. get your own 'captcha KEY' from https://rucaptcha.com/setting page after you registered.  
 `api = RucaptchaApi.new rucaptcha_key`  
